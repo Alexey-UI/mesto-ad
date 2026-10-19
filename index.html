@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mesto</title>
     <link rel="stylesheet" href="./src/pages/index.css" />
+    <link rel="stylesheet" href="./src/pages/connection.css" />
   </head>
   <body class="page">
     <div class="page__content">
@@ -18,20 +19,29 @@
           alt="Логотип проекта место"
           class="logo header__logo"
         />
+        <button class="connection-button" type="button">Подключение</button>
       </header>
       <main class="content">
         <section class="profile page__section">
-          <div
-            class="profile__image"
-            style="background-image: url(&quot;./src/images/avatar.jpg&quot;)"
-          ></div>
+          <div class="profile__image"></div>
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button"></button>
-            <p class="profile__description">Исследователь океана</p>
+            <h1 class="profile__title"></h1>
+            <button
+              class="profile__edit-button"
+              type="button"
+              disabled
+              aria-label="Редактировать профиль"
+            ></button>
+            <p class="profile__description"></p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            type="button"
+            disabled
+            aria-label="Добавить карточку"
+          ></button>
         </section>
+        <p class="request-status page__section" role="status"></p>
         <section class="places page__section">
           <ul class="places__list"></ul>
         </section>
@@ -90,6 +100,7 @@
             >
               Сохранить
             </button>
+            <p class="popup__request-error" role="status"></p>
           </form>
         </div>
       </div>
@@ -142,6 +153,7 @@
             >
               Создать
             </button>
+            <p class="popup__request-error" role="status"></p>
           </form>
         </div>
       </div>
@@ -182,6 +194,7 @@
             >
               Сохранить
             </button>
+            <p class="popup__request-error" role="status"></p>
           </form>
         </div>
       </div>
@@ -195,16 +208,65 @@
         <div class="card__control">
           <button
             type="button"
+            class="card__control-button card__control-button_type_info"
+          ></button>
+          <button
+            type="button"
             class="card__control-button card__control-button_type_delete"
           ></button>
         </div>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <div class="card__likes">
+            <p class="card__like-count"></p>
             <button type="button" class="card__like-button"></button>
           </div>
         </div>
       </li>
     </template>
+    <div class="popup popup_type_info">
+      <div class="popup__content popup__content_content_info">
+        <button type="button" class="popup__close"></button>
+        <h3 class="popup__title">Информация о карточке</h3>
+        <dl class="popup__info"></dl>
+
+        <h4 class="popup__text"></h4>
+        <ul class="popup__list"></ul>
+      </div>
+    </div>
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <dt class="popup__info-term"></dt>
+        <dd class="popup__info-description"></dd>
+      </div>
+    </template>
+    <template id="popup-info-user-preview-template">
+      <li class="popup__list-item popup__list-item_type_badge"></li>
+    </template>
+    <dialog class="connection-dialog" aria-labelledby="connection-title">
+      <h2 id="connection-title">Подключение к Mesto</h2>
+      <p>
+        Укажите личный токен и идентификатор группы из задания Практикума. Токен
+        хранится только в текущей вкладке браузера.
+      </p>
+      <form class="connection-form">
+        <label
+          >Идентификатор группы<input
+            name="cohort"
+            required
+            pattern="[a-zA-Z0-9_\-]+"
+            autocomplete="off"
+        /></label>
+        <label
+          >Личный токен<input
+            name="token"
+            type="password"
+            required
+            autocomplete="off"
+        /></label>
+        <p class="connection-error" role="status"></p>
+        <button type="submit">Подключиться</button>
+      </form>
+    </dialog>
   </body>
 </html>
